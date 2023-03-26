@@ -29,12 +29,36 @@ environment:
 # versions available, run `flutter pub outdated`.
 dependencies:
   cloud_firestore: ^4.4.5
-  cupertino_icons: ^1.0.2
   firebase_auth: ^4.3.0
   firebase_core: ^2.8.0
+  cached_network_image: ^3.2.3
+  carousel_slider: ^4.2.1
+  cupertino_icons: ^1.0.5
+  dart_des: ^1.0.2
+  device_info_plus: ^8.0.0
+  file_picker: ^5.2.5
+  flip_card: ^0.7.0
   flutter:
     sdk: flutter
   shared_preferences: ^2.0.20
+  http: ^0.13.5
+  logging: ^1.1.1
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  just_audio: ^0.9.31
+  on_audio_query: ^2.6.2
+  package_info_plus: ^3.0.2
+  palette_generator: ^0.3.3+2
+  path_provider: ^2.0.12
+  permission_handler: ^10.2.0
+  receive_sharing_intent: ^1.4.5
+  salomon_bottom_bar: ^3.3.1
+  share_plus: ^6.3.0
+  sliding_up_panel: ^2.0.0+1
+  supabase: ^1.1.1
+  url_launcher: ^6.1.8
+  uuid: ^3.0.7
+  youtube_explode_dart: ^1.12.3
 
 dev_dependencies:
 
