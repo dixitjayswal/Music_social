@@ -1,109 +1,78 @@
-name: music_social
-description: A new Flutter project.
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+name: musify
+description: Music Streaming and Downloading app made in Flutter!
+homepage: https://github.com/gokadzev/Musify
+repository: https://github.com/gokadzev/Musify
+issue_tracker: https://github.com/gokadzev/Musify/issues
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number is used as CFBundleVersion.
-# Read more about iOS versioning at
-# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-# In Windows, build-name is used as the major, minor, and patch parts
-# of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+publish_to: 'none'
+version: 4.8.0+48 # run update.sh after changing the version
 
 environment:
-  sdk: '>=2.19.5 <3.0.0'
+  sdk: '>=2.19.4 <3.0.0'
+  flutter: ^3.7.7
 
-# Dependencies specify other packages that your package needs in order to work.
-# To automatically upgrade your package dependencies to the latest versions
-# consider running `flutter pub upgrade --major-versions`. Alternatively,
-# dependencies can be manually updated by changing the version numbers below to
-# the latest version available on pub.dev. To see which dependencies have newer
-# versions available, run `flutter pub outdated`.
 dependencies:
-  cloud_firestore: ^4.4.5
-  firebase_auth: ^4.3.0
-  firebase_core: ^2.8.0
+  audio_session: ^0.1.13
   cached_network_image: ^3.2.3
-  carousel_slider: ^4.2.1
-  cupertino_icons: ^1.0.5
-  dart_des: ^1.0.2
-  device_info_plus: ^8.0.0
-  file_picker: ^5.2.5
-  flip_card: ^0.7.0
+  dynamic_color: ^1.6.2
+  file_picker: ^5.2.6
+  fluentui_system_icons: ^1.1.197
   flutter:
     sdk: flutter
-  shared_preferences: ^2.0.20
-  http: ^0.13.5
-  logging: ^1.1.1
+  flutter_displaymode: ^0.5.0
+  flutter_downloader: ^1.10.2
+  flutter_localizations:
+    sdk: flutter
+  fluttertoast: ^8.2.1
+  get_it: ^7.2.0
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  just_audio: ^0.9.31
-  on_audio_query: ^2.6.2
-  package_info_plus: ^3.0.2
-  palette_generator: ^0.3.3+2
-  path_provider: ^2.0.12
+  http: ^0.13.5
+  intl: ^0.17.0
+  just_audio: ^0.9.32
+  just_audio_background: ^0.0.1-beta.9
+  on_audio_query:
+    path: ./packages/on_audio_query/on_audio_query
   permission_handler: ^10.2.0
-  receive_sharing_intent: ^1.4.5
-  salomon_bottom_bar: ^3.3.1
-  share_plus: ^6.3.0
-  sliding_up_panel: ^2.0.0+1
-  supabase: ^1.1.1
-  url_launcher: ^6.1.8
-  uuid: ^3.0.7
-  youtube_explode_dart: ^1.12.3
+  rxdart: ^0.27.7
+  url_launcher: ^6.1.10
+  youtube_explode_dart: ^1.12.4
 
 dev_dependencies:
-
-  # The "flutter_lints" package below contains a set of recommended lints to
-  # encourage good coding practices. The lint set provided by the package is
-  # activated in the `analysis_options.yaml` file located at the root of your
-  # package. See that file for information about deactivating specific lint
-  # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.12.0
+  flutter_native_splash: ^2.2.19
   flutter_test:
     sdk: flutter
 
-# For information on the generic Dart part of this file, see the
-# following page: https://dart.dev/tools/pub/pubspec
-# The following section is specific to Flutter packages.
-flutter:
+  # flutter_lints: ^2.0.0
 
-  # The following line ensures that the Material Icons font is
-  # included with your application, so that you can use the icons in
-  # the material Icons class.
+flutter:
+  generate: true
   uses-material-design: true
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: fonts/ubuntu.ttf
+
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
-  # To add custom fonts to your application, add a fonts section here,
-  # in this "flutter" section. Each entry in this list should have a
-  # "family" key with the font family name, and a "fonts" key with a
-  # list giving the asset and other descriptors for the font. For
-  # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
-  # For details regarding fonts from package dependencies,
-  # see https://flutter.dev/custom-fonts/#from-packages
+  assets:
+    - assets/db/playlists.db.json
+
+flutter_native_splash:
+  color: '#ffffff'
+  image: assets/images/splash.png
+  color_dark: '#151515'
+  image_dark: assets/images/splash.png
+
+  android_12:
+    image: assets/images/splash.png
+    icon_background_color: '#ffffff'
+    image_dark: assets/images/splash.png
+    icon_background_color_dark: '#151515'
+
+flutter_icons:
+  android: 'launcher_icon'
+  adaptive_icon_background: '#191919'
+  adaptive_icon_foreground: 'assets/images/ic_launcher_foreground.png'
+  adaptive_icon_round: 'assets/images/ic_launcher_round.png'
+  image_path: 'assets/images/ic_launcher.png'

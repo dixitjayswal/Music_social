@@ -1,0 +1,1 @@
+const appVersion = '4.8.0';
