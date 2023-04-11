@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:musify/API/musify.dart';
 import 'package:musify/screens/playlists_page.dart';
+import 'package:musify/screens/register_screen.dart';
 import 'package:musify/style/app_themes.dart';
 import 'package:musify/widgets/marque.dart';
 import 'package:musify/widgets/playlist_cube.dart';
 import 'package:musify/widgets/song_bar.dart';
 import 'package:musify/widgets/spinner.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/auth_provider.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -17,11 +21,30 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final ap = Provider.of<AuthProvider>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
         title: const Text(
           'Dulcet',
         ),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await ap.userSignOut();
+              Navigator.of(context, rootNavigator: true)
+                  .pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return const RegisterScreen();
+                  },
+                ),
+                    (_) => false,
+              );
+
+            },
+            icon: const Icon(Icons.exit_to_app),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(

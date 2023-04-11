@@ -1,11 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:phoneauth_firebase/model/user_model.dart';
-import 'package:phoneauth_firebase/provider/auth_provider.dart';
-import 'package:phoneauth_firebase/screens/home_screen.dart';
-import 'package:phoneauth_firebase/utils/utils.dart';
-import 'package:phoneauth_firebase/widgets/custom_button.dart';
+import 'package:musify/model/user_model.dart';
+import 'package:musify/provider/auth_provider.dart';
+
+import 'package:musify/screens/root_page.dart';
+import 'package:musify/utils/utils.dart';
+import 'package:musify/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
 class UserInfromationScreen extends StatefulWidget {
@@ -44,7 +45,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
         child: isLoading == true
             ? const Center(
                 child: CircularProgressIndicator(
-                  color: Colors.purple,
+                  color: Colors.lightBlueAccent,
                 ),
               )
             : SingleChildScrollView(
@@ -57,7 +58,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                         onTap: () => selectImage(),
                         child: image == null
                             ? const CircleAvatar(
-                                backgroundColor: Colors.purple,
+                                backgroundColor: Colors.lightBlueAccent,
                                 radius: 50,
                                 child: Icon(
                                   Icons.account_circle,
@@ -73,35 +74,56 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                       Container(
                         width: MediaQuery.of(context).size.width,
                         padding: const EdgeInsets.symmetric(
-                            vertical: 5, horizontal: 15),
+                            vertical: 5, horizontal: 15,),
                         margin: const EdgeInsets.only(top: 20),
                         child: Column(
                           children: [
                             // name field
-                            textFeld(
-                              hintText: "John Smith",
-                              icon: Icons.account_circle,
-                              inputType: TextInputType.name,
-                              maxLines: 1,
-                              controller: nameController,
+                            Theme(
+                              data :ThemeData(
+                                  hintColor: Colors.black38,
+                                textTheme: Typography.blackCupertino
+                              )
+                              ,child: textFeld(
+                                hintText: 'Dixit Jayswal',
+                                icon: Icons.account_circle,
+                                inputType: TextInputType.name,
+                                maxLines: 1,
+                                controller: nameController,
+
+                              ),
                             ),
 
                             // email
-                            textFeld(
-                              hintText: "abc@example.com",
-                              icon: Icons.email,
-                              inputType: TextInputType.emailAddress,
-                              maxLines: 1,
-                              controller: emailController,
+                            Theme(
+                              data :ThemeData(
+                                  hintColor: Colors.black38,
+                                  textTheme: Typography.blackCupertino
+
+
+                              ),
+                              child: textFeld(
+                                hintText: "abc@example.com",
+                                icon: Icons.email,
+                                inputType: TextInputType.emailAddress,
+                                maxLines: 1,
+                                controller: emailController,
+                              ),
                             ),
 
                             // bio
-                            textFeld(
-                              hintText: "Enter your bio here...",
-                              icon: Icons.edit,
-                              inputType: TextInputType.name,
-                              maxLines: 2,
-                              controller: bioController,
+                            Theme(
+                              data :ThemeData(
+                                  hintColor: Colors.black38,
+                                  textTheme: Typography.blackCupertino
+                              ),
+                              child: textFeld(
+                                hintText: "Enter your bio here...",
+                                icon: Icons.edit,
+                                inputType: TextInputType.name,
+                                maxLines: 2,
+                                controller: bioController,
+                              ),
                             ),
                           ],
                         ),
@@ -133,7 +155,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: TextFormField(
-        cursorColor: Colors.purple,
+        cursorColor: Colors.lightBlueAccent,
         controller: controller,
         keyboardType: inputType,
         maxLines: maxLines,
@@ -142,7 +164,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
             margin: const EdgeInsets.all(8.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(8),
-              color: Colors.purple,
+              color: Colors.lightBlueAccent,
             ),
             child: Icon(
               icon,
@@ -195,7 +217,7 @@ class _UserInfromationScreenState extends State<UserInfromationScreen> {
                       (value) => Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const HomeScreen(),
+                            builder: (context) =>  Musify(),
                           ),
                           (route) => false),
                     ),

@@ -3,19 +3,24 @@ import 'dart:async';
 import 'package:audio_session/audio_session.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/foundation.dart';
+import 'package:musify/provider/auth_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_displaymode/flutter_displaymode.dart';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:just_audio_background/just_audio_background.dart';
+import 'package:musify/screens/loading.dart';
 import 'package:musify/screens/more_page.dart';
 import 'package:musify/screens/root_page.dart';
 import 'package:musify/services/audio_manager.dart';
 import 'package:musify/style/app_colors.dart';
 import 'package:musify/style/app_themes.dart';
+
 
 GetIt getIt = GetIt.instance;
 bool _interrupted = false;
@@ -121,91 +126,97 @@ class _MyAppState extends State<MyApp> {
     final kContentPadding =
         const EdgeInsets.only(left: 18, right: 20, top: 14, bottom: 14);
 
-    return DynamicColorBuilder(
-      builder: (lightColorScheme, darkColorScheme) {
-        if (lightColorScheme != null &&
-            darkColorScheme != null &&
-            useSystemColor.value) {
-          colorScheme =
-              themeMode == ThemeMode.light ? lightColorScheme : darkColorScheme;
-        }
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
 
-        return MaterialApp(
-          themeMode: themeMode,
-          debugShowCheckedModeBanner: false,
-          darkTheme: darkColorScheme != null && useSystemColor.value
-              ? getAppDarkTheme().copyWith(
-                  scaffoldBackgroundColor: darkColorScheme.surface,
-                  colorScheme: darkColorScheme.harmonized(),
-                  canvasColor: darkColorScheme.surface,
-                  bottomAppBarTheme: BottomAppBarTheme(
-                    color: darkColorScheme.surface,
-                  ),
-                  appBarTheme: AppBarTheme(
-                    backgroundColor: darkColorScheme.surface,
-                    centerTitle: true,
-                    titleTextStyle: TextStyle(
-                      fontSize: 27,
-                      fontWeight: FontWeight.w700,
-                      color: colorScheme.primary,
+      ],
+      child: DynamicColorBuilder(
+        builder: (lightColorScheme, darkColorScheme) {
+          if (lightColorScheme != null &&
+              darkColorScheme != null &&
+              useSystemColor.value) {
+            colorScheme =
+                themeMode == ThemeMode.light ? lightColorScheme : darkColorScheme;
+          }
+
+          return MaterialApp(
+            themeMode: themeMode,
+            debugShowCheckedModeBanner: false,
+            darkTheme: darkColorScheme != null && useSystemColor.value
+                ? getAppDarkTheme().copyWith(
+                    scaffoldBackgroundColor: darkColorScheme.surface,
+                    colorScheme: darkColorScheme.harmonized(),
+                    canvasColor: darkColorScheme.surface,
+                    bottomAppBarTheme: BottomAppBarTheme(
+                      color: darkColorScheme.surface,
                     ),
-                    elevation: 0,
-                  ),
-                  inputDecorationTheme: InputDecorationTheme(
-                    filled: true,
-                    isDense: true,
-                    border: OutlineInputBorder(
-                      borderRadius: kBorderRadius,
+                    appBarTheme: AppBarTheme(
+                      backgroundColor: darkColorScheme.surface,
+                      centerTitle: true,
+                      titleTextStyle: TextStyle(
+                        fontSize: 27,
+                        fontWeight: FontWeight.w700,
+                        color: colorScheme.primary,
+                      ),
+                      elevation: 0,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: kBorderRadius,
+                    inputDecorationTheme: InputDecorationTheme(
+                      filled: true,
+                      isDense: true,
+                      border: OutlineInputBorder(
+                        borderRadius: kBorderRadius,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: kBorderRadius,
+                      ),
+                      contentPadding: kContentPadding,
                     ),
-                    contentPadding: kContentPadding,
-                  ),
-                )
-              : getAppDarkTheme(),
-          theme: lightColorScheme != null && useSystemColor.value
-              ? getAppLightTheme().copyWith(
-                  scaffoldBackgroundColor: lightColorScheme.surface,
-                  colorScheme: lightColorScheme.harmonized(),
-                  canvasColor: lightColorScheme.surface,
-                  bottomAppBarTheme: BottomAppBarTheme(
-                    color: lightColorScheme.surface,
-                  ),
-                  appBarTheme: AppBarTheme(
-                    backgroundColor: lightColorScheme.surface,
-                    centerTitle: true,
-                    titleTextStyle: TextStyle(
-                      fontSize: 27,
-                      fontWeight: FontWeight.w700,
-                      color: colorScheme.primary,
+                  )
+                : getAppDarkTheme(),
+            theme: lightColorScheme != null && useSystemColor.value
+                ? getAppLightTheme().copyWith(
+                    scaffoldBackgroundColor: lightColorScheme.surface,
+                    colorScheme: lightColorScheme.harmonized(),
+                    canvasColor: lightColorScheme.surface,
+                    bottomAppBarTheme: BottomAppBarTheme(
+                      color: lightColorScheme.surface,
                     ),
-                    elevation: 0,
-                  ),
-                  inputDecorationTheme: InputDecorationTheme(
-                    filled: true,
-                    isDense: true,
-                    border: OutlineInputBorder(
-                      borderRadius: kBorderRadius,
+                    appBarTheme: AppBarTheme(
+                      backgroundColor: lightColorScheme.surface,
+                      centerTitle: true,
+                      titleTextStyle: TextStyle(
+                        fontSize: 27,
+                        fontWeight: FontWeight.w700,
+                        color: colorScheme.primary,
+                      ),
+                      elevation: 0,
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderRadius: kBorderRadius,
+                    inputDecorationTheme: InputDecorationTheme(
+                      filled: true,
+                      isDense: true,
+                      border: OutlineInputBorder(
+                        borderRadius: kBorderRadius,
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: kBorderRadius,
+                      ),
+                      contentPadding: kContentPadding,
                     ),
-                    contentPadding: kContentPadding,
-                  ),
-                )
-              : getAppLightTheme(),
-          localizationsDelegates: const [
-            AppLocalizations.delegate,
-            GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate,
-            GlobalCupertinoLocalizations.delegate,
-          ],
-          supportedLocales: appSupportedLocales,
-          locale: _locale,
-          home: Musify(),
-        );
-      },
+                  )
+                : getAppLightTheme(),
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            supportedLocales: appSupportedLocales,
+            locale: _locale,
+            home: Loading(),
+          );
+        },
+      ),
     );
   }
 }
@@ -213,6 +224,7 @@ class _MyAppState extends State<MyApp> {
 void main() async {
   await initialisation();
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 

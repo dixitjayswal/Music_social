@@ -1,7 +1,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:phoneauth_firebase/provider/auth_provider.dart';
-import 'package:phoneauth_firebase/widgets/custom_button.dart';
+import 'package:musify/provider/auth_provider.dart';
+import 'package:musify/widgets/custom_button.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       color: Colors.purple.shade50,
                     ),
                     child: Image.asset(
-                      "assets/image2.png",
+                      "assets/SR/image2.png",
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -67,7 +67,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     "Add your phone number. We'll send you a verification code",
                     style: TextStyle(
                       fontSize: 14,
-                      color: Colors.black38,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.center,

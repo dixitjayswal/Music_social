@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:phoneauth_firebase/provider/auth_provider.dart';
-import 'package:phoneauth_firebase/screens/home_screen.dart';
-import 'package:phoneauth_firebase/screens/user_information_screen.dart';
-import 'package:phoneauth_firebase/utils/utils.dart';
-import 'package:phoneauth_firebase/widgets/custom_button.dart';
+import 'package:musify/provider/auth_provider.dart';
+import 'package:musify/screens/root_page.dart';
+import 'package:musify/screens/user_information_screen.dart';
+import 'package:musify/utils/utils.dart';
+import 'package:musify/widgets/custom_button.dart';
 import 'package:pinput/pinput.dart';
 import 'package:provider/provider.dart';
 
@@ -28,7 +28,7 @@ class _OtpScreenState extends State<OtpScreen> {
           child: isLoading == true
               ? const Center(
                   child: CircularProgressIndicator(
-                    color: Colors.purple,
+                    color: Colors.lightBlueAccent,
                   ),
                 )
               : Center(
@@ -53,7 +53,7 @@ class _OtpScreenState extends State<OtpScreen> {
                             color: Colors.purple.shade50,
                           ),
                           child: Image.asset(
-                            "assets/image2.png",
+                            "assets/SR/image2.png",
                           ),
                         ),
                         const SizedBox(height: 20),
@@ -159,7 +159,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 (value) => Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => const HomeScreen(),
+                                      builder: (context) => Musify(),
                                     ),
                                     (route) => false),
                               ),

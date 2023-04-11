@@ -37,12 +37,23 @@ dependencies:
   rxdart: ^0.27.7
   url_launcher: ^6.1.10
   youtube_explode_dart: ^1.12.4
+  cupertino_icons: ^1.0.2
+  country_picker: ^2.0.18
+  firebase_core: ^2.3.0
+  firebase_auth: ^4.1.5
+  cloud_firestore: ^4.1.0
+  firebase_storage: ^11.0.6
+  shared_preferences: ^2.0.15
+  provider: ^6.0.4
+  pinput: ^2.2.16
+  image_picker: ^0.8.6
 
 dev_dependencies:
   flutter_launcher_icons: ^0.12.0
   flutter_native_splash: ^2.2.19
   flutter_test:
     sdk: flutter
+
 
   # flutter_lints: ^2.0.0
 
@@ -57,6 +68,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/db/playlists.db.json
+    - assets/SR/
 
 flutter_native_splash:
   color: '#ffffff'
